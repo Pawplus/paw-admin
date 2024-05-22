@@ -3,11 +3,11 @@ export default defineNuxtConfig({
     devtools: {
         enabled: true,
     },
-    supabase: {
-        redirect: false,
-        url: process.env.SUPABASE_URL,
-        key: process.env.SUPABASE_KEY
-    },
+    // supabase: {
+    //     redirect: false,
+    //     url: process.env.SUPABASE_URL,
+    //     key: process.env.SUPABASE_KEY
+    // },
     ssr: false,
     typescript: {
         shim: false
@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     },
     devServerHandlers: [],
     hooks: {},
-    modules: ["@nuxtjs/supabase", "@pinia/nuxt"],
+    modules: ["@pinia/nuxt"], //"@nuxtjs/supabase",
     imports: {
         autoImport: true,
         dirs: ["store", "types"]
