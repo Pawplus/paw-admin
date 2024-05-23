@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ConsulClinic from '~/components/dashboard/ConsulClinic.vue';
-import ProductPerformance from '~/components/dashboard/ProductPerformance.vue';
 import SalesOverview from '~/components/dashboard/SalesOverview.vue';
 import YearlyBreakup from '~/components/dashboard/YearlyBreakup.vue';
 </script>
