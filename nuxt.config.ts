@@ -25,8 +25,7 @@ export default defineNuxtConfig({
   },
   devServerHandlers: [],
   hooks: {},
-  //   modules: ["@nuxtjs/supabase", "@pinia/nuxt"],
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt"], //"@nuxtjs/supabase",
   imports: {
     autoImport: true,
     dirs: ["store", "types"],

@@ -30,4 +30,20 @@ type productsCards = {
     rating: number;
 };
 
-export type { recentTrans, productPerformanceType, productsCards }
+// payment verification types
+type Payment = {
+    no: number
+    orderId: string
+    orderDate: string
+    service: string
+    userEmail: string
+    doctor: string
+    paymentAmount: number
+    uniqueCode: string
+    paymentMethod: string
+    action: string
+  }
+
+
+
+export type { recentTrans, productPerformanceType, productsCards, Payment }

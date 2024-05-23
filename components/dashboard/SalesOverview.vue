@@ -3,10 +3,11 @@ import { ref } from "vue";
 import { computed } from "vue";
 import { useTheme } from "vuetify";
 const theme = useTheme();
+const totalIncome = 100000;
 const primary = theme.current.value.colors.primary;
-const secondary = theme.current.value.colors.secondary;
-const select = ref("March 2023");
-const items = ref(["March 2023", "April 2023", "May 2023"]);
+const secondary = theme.current.value.colors.info;
+const select = ref("March 2024");
+const items = ref(["March 2024", "April 2024", "May 2024"]);
 const chartOptions = computed(() => {
   return {
     series: [
@@ -100,7 +101,9 @@ const chartOptions = computed(() => {
   <v-card elevation="10" class="withbg">
     <v-card-item>
       <div class="d-sm-flex align-center justify-space-between pt-sm-2">
-        <div><v-card-title class="text-h5">Sales Overview</v-card-title></div>
+        <div><v-card-title class="text-h5">Jumlah Pendapatan Bulanan</v-card-title>     
+          {{ totalIncome }}
+        </div>
         <div class="my-sm-0 my-2">
           <v-select
             v-model="select"
