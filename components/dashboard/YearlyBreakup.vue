@@ -45,12 +45,12 @@ const Chart = [38, 40, 25];
   <v-card elevation="10" class="withbg">
     <v-card-item>
       <div class="d-sm-flex align-center justify-space-between pt-sm-2">
-        <v-card-title class="text-h5">Yearly Breakup</v-card-title>
+        <v-card-title class="text-h5">Konsultasi Online</v-card-title>
       </div>
       <v-row>
         <v-col cols="7" sm="7">
           <div class="mt-6">
-            <h3 class="text-h3">$36,358</h3>
+            <h3 class="text-h3">3,358</h3>
             <div class="mt-1">
               <v-avatar class="bg-lightsuccess text-success" size="25">
                 <ArrowUpLeftIcon size="20" />
