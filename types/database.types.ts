@@ -9,36 +9,104 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      about: {
+      account: {
         Row: {
-          about: string | null
-          about_header: string | null
-          about_thumbnail: string | null
           created_at: string
-          founder_bio: string | null
-          founder_name: string | null
-          founder_picture: string | null
+          email: string | null
+          full_name: string | null
+          id: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      animal: {
+        Row: {
+          animal_name: string | null
+          animal_ref: string | null
+          animal_thumbnail: string | null
+          created_at: string
           id: number
         }
         Insert: {
-          about?: string | null
-          about_header?: string | null
-          about_thumbnail?: string | null
+          animal_name?: string | null
+          animal_ref?: string | null
+          animal_thumbnail?: string | null
           created_at?: string
-          founder_bio?: string | null
-          founder_name?: string | null
-          founder_picture?: string | null
           id?: number
         }
         Update: {
-          about?: string | null
-          about_header?: string | null
-          about_thumbnail?: string | null
+          animal_name?: string | null
+          animal_ref?: string | null
+          animal_thumbnail?: string | null
           created_at?: string
-          founder_bio?: string | null
-          founder_name?: string | null
-          founder_picture?: string | null
           id?: number
+        }
+        Relationships: []
+      }
+      animal_races: {
+        Row: {
+          animal_id: number | null
+          created_at: string
+          id: number
+          race_name: string | null
+          race_value: string | null
+        }
+        Insert: {
+          animal_id?: number | null
+          created_at?: string
+          id?: number
+          race_name?: string | null
+          race_value?: string | null
+        }
+        Update: {
+          animal_id?: number | null
+          created_at?: string
+          id?: number
+          race_name?: string | null
+          race_value?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "animal_race_animal_id_fkey"
+            columns: ["animal_id"]
+            isOneToOne: false
+            referencedRelation: "animal"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      banner: {
+        Row: {
+          banner: string | null
+          created_at: string
+          id: number
+          is_active: boolean | null
+        }
+        Insert: {
+          banner?: string | null
+          created_at?: string
+          id?: number
+          is_active?: boolean | null
+        }
+        Update: {
+          banner?: string | null
+          created_at?: string
+          id?: number
+          is_active?: boolean | null
         }
         Relationships: []
       }
@@ -48,170 +116,261 @@ export type Database = {
           created_at: string
           id: number
           thumbnail: string | null
-          title: string | null
         }
         Insert: {
           content?: string | null
           created_at?: string
           id?: number
           thumbnail?: string | null
-          title?: string | null
         }
         Update: {
           content?: string | null
           created_at?: string
           id?: number
           thumbnail?: string | null
-          title?: string | null
         }
         Relationships: []
       }
-      contact_information: {
-        Row: {
-          created_at: string
-          id: number
-          key: string | null
-          name: string | null
-          value: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          key?: string | null
-          name?: string | null
-          value?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          key?: string | null
-          name?: string | null
-          value?: string | null
-        }
-        Relationships: []
-      }
-      gallery: {
-        Row: {
-          created_at: string
-          id: number
-          image: string | null
-          name: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: number
-          image?: string | null
-          name?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: number
-          image?: string | null
-          name?: string | null
-        }
-        Relationships: []
-      }
-      product: {
+      chat: {
         Row: {
           content: string | null
           created_at: string
           id: number
-          product_name: string | null
-          thumbnail: string | null
+          media: string | null
+          media_type: string | null
+          sender_id: number | null
+          transaction_id: number | null
+          type: string | null
         }
         Insert: {
           content?: string | null
           created_at?: string
           id?: number
-          product_name?: string | null
-          thumbnail?: string | null
+          media?: string | null
+          media_type?: string | null
+          sender_id?: number | null
+          transaction_id?: number | null
+          type?: string | null
         }
         Update: {
           content?: string | null
           created_at?: string
           id?: number
-          product_name?: string | null
-          thumbnail?: string | null
-        }
-        Relationships: []
-      }
-      product_price: {
-        Row: {
-          created_at: string
-          duration: string | null
-          exclude: string | null
-          id: number
-          include: string | null
-          name: string | null
-          price: number | null
-          product_id: number | null
-          product_price_category_id: number | null
-          result: string | null
-        }
-        Insert: {
-          created_at?: string
-          duration?: string | null
-          exclude?: string | null
-          id?: number
-          include?: string | null
-          name?: string | null
-          price?: number | null
-          product_id?: number | null
-          product_price_category_id?: number | null
-          result?: string | null
-        }
-        Update: {
-          created_at?: string
-          duration?: string | null
-          exclude?: string | null
-          id?: number
-          include?: string | null
-          name?: string | null
-          price?: number | null
-          product_id?: number | null
-          product_price_category_id?: number | null
-          result?: string | null
+          media?: string | null
+          media_type?: string | null
+          sender_id?: number | null
+          transaction_id?: number | null
+          type?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "product_price_product_id_fkey"
-            columns: ["product_id"]
+            foreignKeyName: "chat_sender_id_fkey"
+            columns: ["sender_id"]
             isOneToOne: false
-            referencedRelation: "product_price"
+            referencedRelation: "account"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "product_price_product_price_category_id_fkey"
-            columns: ["product_price_category_id"]
+            foreignKeyName: "chat_transaction_id_fkey"
+            columns: ["transaction_id"]
             isOneToOne: false
-            referencedRelation: "product_price_category"
+            referencedRelation: "transaction"
             referencedColumns: ["id"]
           },
         ]
       }
-      product_price_category: {
+      clinic: {
         Row: {
-          category_group: string | null
+          clinic_banner: string | null
+          clinic_location: string | null
+          clinic_name: string | null
           created_at: string
           id: number
-          name: string | null
-          value: string | null
+          owner: number | null
         }
         Insert: {
-          category_group?: string | null
+          clinic_banner?: string | null
+          clinic_location?: string | null
+          clinic_name?: string | null
           created_at?: string
           id?: number
-          name?: string | null
-          value?: string | null
+          owner?: number | null
         }
         Update: {
-          category_group?: string | null
+          clinic_banner?: string | null
+          clinic_location?: string | null
+          clinic_name?: string | null
           created_at?: string
           id?: number
-          name?: string | null
-          value?: string | null
+          owner?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinic_owner_fkey"
+            columns: ["owner"]
+            isOneToOne: false
+            referencedRelation: "account"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      doctor: {
+        Row: {
+          account_id: number | null
+          created_at: string
+          doctor_experience: string | null
+          doctor_name: string | null
+          doctor_profile_picture: string | null
+          id: number
+        }
+        Insert: {
+          account_id?: number | null
+          created_at?: string
+          doctor_experience?: string | null
+          doctor_name?: string | null
+          doctor_profile_picture?: string | null
+          id?: number
+        }
+        Update: {
+          account_id?: number | null
+          created_at?: string
+          doctor_experience?: string | null
+          doctor_name?: string | null
+          doctor_profile_picture?: string | null
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "doctor_account_id_fkey"
+            columns: ["account_id"]
+            isOneToOne: false
+            referencedRelation: "account"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pet: {
+        Row: {
+          animal_id: number | null
+          created_at: string
+          id: number
+          owner_id: number | null
+          pet_dob: string | null
+          pet_gender: string | null
+          pet_name: string | null
+          pet_race_id: number | null
+          pet_thumbnail: string | null
+          pet_weight: number | null
+        }
+        Insert: {
+          animal_id?: number | null
+          created_at?: string
+          id?: number
+          owner_id?: number | null
+          pet_dob?: string | null
+          pet_gender?: string | null
+          pet_name?: string | null
+          pet_race_id?: number | null
+          pet_thumbnail?: string | null
+          pet_weight?: number | null
+        }
+        Update: {
+          animal_id?: number | null
+          created_at?: string
+          id?: number
+          owner_id?: number | null
+          pet_dob?: string | null
+          pet_gender?: string | null
+          pet_name?: string | null
+          pet_race_id?: number | null
+          pet_thumbnail?: string | null
+          pet_weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pet_animal_id_fkey"
+            columns: ["animal_id"]
+            isOneToOne: false
+            referencedRelation: "animal"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pet_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "account"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pet_pet_race_id_fkey"
+            columns: ["pet_race_id"]
+            isOneToOne: false
+            referencedRelation: "animal_races"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product: {
+        Row: {
+          created_at: string
+          id: number
+          product_description: string | null
+          product_name: string | null
+          product_price: number | null
+          product_thumbnail: string | null
+          product_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          product_description?: string | null
+          product_name?: string | null
+          product_price?: number | null
+          product_thumbnail?: string | null
+          product_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          product_description?: string | null
+          product_name?: string | null
+          product_price?: number | null
+          product_thumbnail?: string | null
+          product_url?: string | null
         }
         Relationships: []
+      }
+      transaction: {
+        Row: {
+          consultation_at: string | null
+          created_at: string
+          id: number
+          payment_status: string | null
+          user_id: number | null
+        }
+        Insert: {
+          consultation_at?: string | null
+          created_at?: string
+          id?: number
+          payment_status?: string | null
+          user_id?: number | null
+        }
+        Update: {
+          consultation_at?: string | null
+          created_at?: string
+          id?: number
+          payment_status?: string | null
+          user_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transaction_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "account"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
