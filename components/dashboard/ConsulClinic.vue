@@ -13,17 +13,12 @@ const secondary = theme.current.value.colors.secondary;
   <v-card elevation="10" class="withbg">
     <v-card-item>
       <div class="d-flex align-center justify-space-between pt-sm-2">
-        <v-card-title class="text-h5">Monthly Earnings</v-card-title>
-        <v-btn size="large" icon class="bg-secondary">
-          <v-avatar size="large" class="text-white">
-            <CurrencyDollarIcon size="25" />
-          </v-avatar>
-        </v-btn>
+        <v-card-title class="text-h5">Konsultasi Klinik</v-card-title>
       </div>
       <v-row>
         <v-col cols="12">
           <div class="mt-2">
-            <h3 class="text-h3">$6,820</h3>
+            <h3 class="text-h3">600</h3>
             <div class="mt-1">
               <v-avatar class="bg-lighterror text-accent" size="25">
                 <ArrowDownRightIcon size="20" />
