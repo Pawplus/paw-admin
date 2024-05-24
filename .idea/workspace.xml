@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="228f2382-2700-42b8-8657-7980c5818eb8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/components/editor/TipTap.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/composables/useFile.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/middleware/auth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/auth/sign-in.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/notifications.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/plugins/vuetify.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo-assessment.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/contact.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/data/about.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/data/blog.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/data/product.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/types/model.ts" afterDir="false" />
+    <list default="true" id="228f2382-2700-42b8-8657-7980c5818eb8" name="Changes" comment="feat: initiate">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/dashboard/MonthlyEarnings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/dashboard/MonthlyEarnings.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/dashboard/SalesOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/dashboard/SalesOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/dashboard/YearlyBreakup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/components/dashboard/YearlyBreakup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/vuetify.ts" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/vuetify.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "triandamai"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Pawplus/paw-admin.git",
+    "accountId": "8d9369b0-7268-4d1a-8e94-1366945be063"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -112,11 +119,24 @@
       <workItem from="1715824659473" duration="6852000" />
       <workItem from="1715832811537" duration="4865000" />
       <workItem from="1716211262517" duration="716000" />
-      <workItem from="1716253159001" duration="103000" />
+      <workItem from="1716253159001" duration="1611000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: initiate">
+      <option name="closed" value="true" />
+      <created>1716253318222</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716253318222</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: initiate" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: initiate" />
   </component>
 </project>
