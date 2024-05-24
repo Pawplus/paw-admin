@@ -5,9 +5,6 @@ import { useTheme } from "vuetify";
 const theme = useTheme();
 const totalIncome = 100000;
 const primary = theme.current.value.colors.primary;
-const secondary = theme.current.value.colors.secondary;
-const select = ref("March 2023");
-const items = ref(["March 2023", "April 2023", "May 2023"]);
 const secondary = theme.current.value.colors.info;
 const select = ref("March 2024");
 const items = ref(["March 2024", "April 2024", "May 2024"]);
@@ -84,12 +81,27 @@ const chartOptions = computed(() => {
       },
       tooltip: { theme: "light" },
 
+      responsive: [
+        {
+          breakpoint: 600,
+          options: {
+            plotOptions: {
+              bar: {
+                borderRadius: 3,
+              },
+            },
+          },
+        },
+      ],
+    },
+  };
+});
 </script>
 <template>
   <v-card elevation="10" class="withbg">
     <v-card-item>
       <div class="d-sm-flex align-center justify-space-between pt-sm-2">
-        <div><v-card-title class="text-h5">Jumlah Pendapatan Bulanan</v-card-title>
+        <div><v-card-title class="text-h5">Jumlah Pendapatan Bulanan</v-card-title>     
           {{ totalIncome }}
         </div>
         <div class="my-sm-0 my-2">
@@ -103,7 +115,13 @@ const chartOptions = computed(() => {
         </div>
       </div>
       <div class="mt-6">
-
+        <apexchart
+          type="bar"
+          height="370px"
+          :options="chartOptions.chartOptions"
+          :series="chartOptions.series"
+        >
+        </apexchart>
       </div>
     </v-card-item>
   </v-card>
