@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ConsulClinic from '~/components/dashboard/ConsulClinic.vue';
-import ProductPerformance from '~/components/dashboard/ProductPerformance.vue';
 import SalesOverview from '~/components/dashboard/SalesOverview.vue';
 import YearlyBreakup from '~/components/dashboard/YearlyBreakup.vue';
 </script>
@@ -10,10 +9,12 @@ import YearlyBreakup from '~/components/dashboard/YearlyBreakup.vue';
         <v-container>
           <v-row no-gutters>
             <v-col cols="12" md="3">
-              <DashboardSideBar />
+              <!-- <DashboardSideBar :role="'superadmin'" /> -->
+              <DashboardSideBar :role="'adminklinik'" />
             </v-col>
             <v-col cols="12" md="13">
-              <DashboardCards />
+              <!-- <DashboardCards :role="'superadmin'" /> -->
+              <DashboardCards :role="'adminklinik'" />
             </v-col>
             <v-col cols="12" md="8">
               <SalesOverview/>
