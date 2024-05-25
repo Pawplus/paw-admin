@@ -9,12 +9,12 @@ import YearlyBreakup from '~/components/dashboard/YearlyBreakup.vue';
       <v-container>
         <v-row no-gutters>
           <v-col cols="12" md="3">
-            <!-- <DashboardSideBar :role="'superadmin'" /> -->
-            <DashboardSideBar :role="'adminklinik'" />
+            <DashboardSideBar :role="'superadmin'" />
+            <!-- <DashboardSideBar :role="'adminklinik'" /> -->
           </v-col>
           <v-col cols="12" md="13">
-            <!-- <DashboardCards :role="'superadmin'" /> -->
-            <DashboardCards :role="'adminklinik'" />
+            <DashboardCards :role="'superadmin'" />
+            <!-- <DashboardCards :role="'adminklinik'" /> -->
           </v-col>
           <v-col cols="12" md="8">
             <SalesOverview/>
