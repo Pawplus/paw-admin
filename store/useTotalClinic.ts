@@ -19,30 +19,24 @@ export const useTotalClinic = defineStore<
   }),
   getters: {},
   actions: {
-    async fetchTotalClinic(): Promise<void> {
+    async fetchTotalClinic() {
       this.loading = true;
       this.error = null;
 
-      try {
-        const client = useSupabaseClient<Database>();
-        const { data, error } = await client
-          .from("clinic")
-          .select("*", { count: "exact" });
+      const client = useSupabaseClient<Database>();
 
-        if (error) {
-          throw error;
-        }
+      const { data, error } = await client
+        .from("clinic")
+        .select("*", { count: "exact" });
 
+      if (error) {
+        this.error = error.message;
+        this.totalClinic = null;
+      } else {
         this.totalClinic = data ? data.length : 0;
-      } catch (err) {
-        if (err instanceof Error) {
-          this.error = err.message;
-        } else {
-          this.error = "Wow, unexpected error occurred";
-        }
-      } finally {
-        this.loading = false;
       }
+
+      this.loading = false;
     },
   },
 });
