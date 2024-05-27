@@ -20,7 +20,6 @@ const signIn = async () => {
   if (success) {
     router.push('/ui/admin-dashboard');
   } else {
-    router.push('/auth/sign-in');
     alert('Sign-in failed');
   }
 };
