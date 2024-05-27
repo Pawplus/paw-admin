@@ -1,30 +1,38 @@
 <script setup lang="ts">
-/*-For Set Blank Layout-*/
 import { ref } from "vue";
+import { useRouter } from 'vue-router';
+import { useAuth } from '~/store/useAuth';
 
 definePageMeta({
   layout: "blank",
 });
 
-// const auth = useAuth()
-
-const checkbox = ref(true);
+const auth = useAuth();
+const router = useRouter();
 const email = ref('');
 const password = ref('');
 const showPassword = ref(false);
 
+const signIn = async () => {
+  auth.email = email.value;
+  auth.password = password.value;
+  const success = await auth.signInWithEmail();
+  if (success) {
+    router.push('/ui/admin-dashboard');
+  } else {
+    router.push('/auth/sign-in');
+    alert('Sign-in failed');
+  }
+};
 </script>
 
 <template>
-
   <v-row class="h-auto d-flex justify-center align-center pa-sm-8">
     <v-col cols="12" class="d-flex align-center">
       <v-row class="w-100">
-        <!-- Left column for image -->
         <v-col cols="12" md="6" class="d-flex mx-auto">
           <img src="/images/background/auth.png" alt="Sign In Image" class="w-full pa-sm-4">
         </v-col>
-        <!-- Right column for login form -->
         <v-col cols="12" md="6" class="d-flex justify-center align-center items-center">
           <v-card rounded="md" elevation="0" class="px-sm-1 px-0 mx-auto" max-width="500">
             <v-card-item class="pa-sm-12">
@@ -43,7 +51,6 @@ const showPassword = ref(false);
                 </v-col>
                 <v-col cols="12" class="pt-3">
                   <div class="d-flex flex-wrap align-center ml-n2">
-
                     <div class="ml-sm-auto">
                       <NuxtLink to="/"
                         class="text-primary text-decoration-none text-body-1 opacity-1 font-weight-medium">
