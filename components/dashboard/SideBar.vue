@@ -43,13 +43,13 @@ const isSuperAdmin = computed(() => props.role === 'superadmin');
     <v-list>
       <v-list-item prepend-icon="mdi-home" title="Dashboard"></v-list-item>
 
-      <v-list-group class="mt-8" value="Manajemen Keuangan">
+      <v-list-group class="mt-8" value="Manajemen Konsultasi">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" prepend-icon="mdi-cash-multiple">Manajemen keuangan</v-list-item>
+          <v-list-item v-bind="props" prepend-icon="mdi-credit-card-edit">Manajemen Konsultasi</v-list-item>
         </template>
 
         <v-list-item
-          v-for="([title, icon], i) in money"
+          v-for="([title, icon], i) in consultation"
           :key="i"
           :prepend-icon="icon"
           :title="title"
@@ -57,13 +57,13 @@ const isSuperAdmin = computed(() => props.role === 'superadmin');
         ></v-list-item>
       </v-list-group>
 
-      <v-list-group class="mt-5" value="Manajemen Konsultasi">
+      <v-list-group class="mt-5" value="Manajemen Keuangan">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" prepend-icon="mdi-credit-card-edit">Manajemen Konsultasi</v-list-item>
+          <v-list-item v-bind="props" prepend-icon="mdi-cash-multiple">Manajemen keuangan</v-list-item>
         </template>
 
         <v-list-item
-          v-for="([title, icon], i) in consultation"
+          v-for="([title, icon], i) in money"
           :key="i"
           :prepend-icon="icon"
           :title="title"
