@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Consultation } from '~/types/dashboard';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const getCurrentDate = (): string => {
     const today = new Date();
@@ -30,6 +32,10 @@ const getCurrentTime = (): string => {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
+};
+
+const goBack = () => {
+  window.history.length > 1 ? router.go(-1) : router.push('/');
 };
 
 const consultation = ref<Consultation>({
@@ -72,9 +78,12 @@ const consultation = ref<Consultation>({
         <v-card class="mb-5">
             <v-card-title class="d-flex justify-space-between align-center">
                 <div>
+                    <v-btn icon @click="goBack" class="mr-5">
+                      <v-icon>mdi-arrow-left</v-icon>
+                    </v-btn>
                     Konsultasi ID#{{ consultation.id }}
                     <span class="pl-6 grey--text">Menunggu Verifikasi</span>
-                </div>
+                  </div>
                 <v-btn color="primary">Verifikasi Pembayaran</v-btn>
             </v-card-title>
             <v-card-text>
