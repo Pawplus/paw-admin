@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import type { Consultation } from '~/types/dashboard';
 import { useRouter } from 'vue-router';
+import PopupModal from './PopupModal.vue';
 const router = useRouter();
 
 const getCurrentDate = (): string => {
@@ -32,6 +33,12 @@ const getCurrentTime = (): string => {
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
+};
+
+const dialog = ref(false);
+
+const openDialog = () => {
+  dialog.value = true;
 };
 
 const goBack = () => {
@@ -84,7 +91,7 @@ const consultation = ref<Consultation>({
                     Konsultasi ID#{{ consultation.id }}
                     <span class="pl-6 grey--text">Menunggu Verifikasi</span>
                   </div>
-                <v-btn color="primary">Verifikasi Pembayaran</v-btn>
+                  <v-btn color="primary" @click="openDialog">Verifikasi Pembayaran</v-btn>
             </v-card-title>
             <v-card-text>
                 <v-row >
@@ -147,6 +154,7 @@ const consultation = ref<Consultation>({
                 </v-simple-table>
             </v-card-text>
         </v-card>
+        <PopupModal :consultation="consultation" v-model="dialog" />
     </v-container>
 </template>
 
