@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import type { Consultation } from '~/types/dashboard';
 
 const getCurrentDate = (): string => {
     const today = new Date();
@@ -30,31 +31,6 @@ const getCurrentTime = (): string => {
     const minutes = String(now.getMinutes()).padStart(2, '0');
     return `${hours}:${minutes}`;
 };
-
-interface Consultation {
-    id: string;
-    orderDate: string;
-    orderTime: string;
-    email: string;
-    service: string;
-    doctor: string;
-    paymentAmount: string;
-    uniqueCode: string;
-    paymentMethod: string;
-    pet: {
-        name: string;
-        age: string;
-        breed: string;
-        gender: string;
-        notes: string;
-    };
-    history: Array<{
-        date: string;
-        service: string;
-        notes: string;
-        chatLink: string;
-    }>;
-}
 
 const consultation = ref<Consultation>({
     id: '21212121',
