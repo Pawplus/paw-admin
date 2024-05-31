@@ -44,6 +44,32 @@ type Payment = {
     action: string
   }
 
+//   Detail Consultation types
+type Consultation = {
+    id: string;
+    orderDate: string;
+    orderTime: string;
+    email: string;
+    service: string;
+    doctor: string;
+    paymentAmount: string;
+    uniqueCode: string;
+    paymentMethod: string;
+    pet: {
+        name: string;
+        age: string;
+        breed: string;
+        gender: string;
+        notes: string;
+    };
+    history: Array<{
+        date: string;
+        service: string;
+        notes: string;
+        chatLink: string;
+    }>;
+}
 
 
-export type { recentTrans, productPerformanceType, productsCards, Payment }
+
+export type { recentTrans, productPerformanceType, productsCards, Payment, Consultation }
