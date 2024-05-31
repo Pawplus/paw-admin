@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue';
 import { defineProps } from 'vue';
 import { useTotalClinic } from '~/store/useTotalClinic';
 import { useTotalDoctor } from '~/store/useTotalDoctor';
+import { useTotalFinishedOrder } from '~/store/useTotalFinishedOrder';
 
 const props = defineProps({
   role: {
@@ -13,16 +14,18 @@ const props = defineProps({
 
 const totalClinicStore = useTotalClinic();
 const totalDoctorStore = useTotalDoctor();
+const totalFinishedOrderStore = useTotalFinishedOrder();
 
 onMounted(async () => {
   await totalClinicStore.fetchTotalClinic();
   await totalDoctorStore.fetchTotalDoctor();
+  await totalFinishedOrderStore.fetchTotalFinishedOrders();
 });
 
 const cardData = computed(() => [
   { title: "Jumlah Klinik", value: totalClinicStore.totalClinic ?? 0 },
   { title: "Jumlah Dokter", value: totalDoctorStore.totalDoctor ?? 0 },
-  { title: "Order Selesai", value: 23 },
+  { title: "Order Selesai", value: totalFinishedOrderStore.totalFinishedOrders ?? 0 },
   { title: "Order Aktif", value: 23 }
 ]);
 
