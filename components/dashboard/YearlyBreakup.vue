@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useTheme } from "vuetify";
+import { useOnlineConsultations } from "~/store/useOnlineConsultations";
+
+
 const theme = useTheme();
 const primary = theme.current.value.colors.primary;
 const lightprimary = theme.current.value.colors.lightprimary;
@@ -29,7 +32,6 @@ const chartOptions = computed(() => {
     stroke: {
       show: false,
     },
-
     dataLabels: {
       enabled: false,
     },
@@ -40,6 +42,13 @@ const chartOptions = computed(() => {
   };
 });
 const Chart = [38, 40, 25];
+
+const onlineConsultationsStore = useOnlineConsultations();
+const { totalOnlineConsultations, fetchTotalOnlineConsultations } = onlineConsultationsStore;
+
+onMounted(() => {
+  fetchTotalOnlineConsultations();
+});
 </script>
 <template>
   <v-card elevation="10" class="withbg">
@@ -50,7 +59,7 @@ const Chart = [38, 40, 25];
       <v-row>
         <v-col cols="7" sm="7">
           <div class="mt-6">
-            <h3 class="text-h3">3,358</h3>
+            <h3 class="text-h3">{{ totalOnlineConsultations }}</h3>
             <div class="mt-1">
               <v-avatar class="bg-lightsuccess text-success" size="25">
                 <ArrowUpLeftIcon size="20" />
