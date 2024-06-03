@@ -54,7 +54,6 @@ const areaChart = {
   ],
 };
 
-// Store logic
 const consulClinicStore = useConsulClinic();
 const { totalConsultations, fetchTotalConsultations } = consulClinicStore;
 
