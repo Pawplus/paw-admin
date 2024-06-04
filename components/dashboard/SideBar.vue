@@ -28,6 +28,7 @@ const clinic = ref([
   ['Tambah Klinik'],
   ['Tambah Dokter'],
   ['Daftar Klinik'],
+  ['Daftar Dokter'],
 ]);
 
 const setting = ref([
