@@ -19,9 +19,9 @@ const consultation = ref([
   ['Riwayat Konsultasi'],
 ]);
 
-const user = ref([
-  ['Daftar Pengguna'],
-  ['Aktivitas Pengguna'],
+const product = ref([
+  ['Tambah Produk'],
+  ['Daftar Produk'],
 ]);
 
 const clinic = ref([
@@ -72,13 +72,13 @@ const isSuperAdmin = computed(() => props.role === 'superadmin');
         ></v-list-item>
       </v-list-group>
 
-      <v-list-group v-if="isSuperAdmin" class="mt-5" value="Manajemen Pengguna">
+      <v-list-group v-if="isSuperAdmin" class="mt-5" value="Manajemen Produk">
         <template v-slot:activator="{ props }">
-          <v-list-item v-bind="props" prepend-icon="mdi-account-group">Manajemen Pengguna</v-list-item>
+          <v-list-item v-bind="props" prepend-icon="mdi-account-group">Manajemen Produk</v-list-item>
         </template>
 
         <v-list-item
-          v-for="([title, icon], i) in user"
+          v-for="([title, icon], i) in product"
           :key="i"
           :prepend-icon="icon"
           :title="title"
