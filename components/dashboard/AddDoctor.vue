@@ -118,7 +118,7 @@ const onFileChange = (event: Event) => {
             </v-row>
             <v-row justify="center">
               <v-col cols="12" md="8">
-                <v-btn block @click="submitForm" color="primary">Tambah Klinik</v-btn>
+                <v-btn block @click="submitForm" color="primary">Tambah Dokter</v-btn>
               </v-col>
             </v-row>
           </v-form>
