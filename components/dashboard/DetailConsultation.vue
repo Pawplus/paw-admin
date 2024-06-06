@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import type { Consultation } from '~/types/dashboard';
 import { useRouter } from 'vue-router';
-import PopupModal from './PopupModal.vue';
+import PopupModal from './PopupModalDetailConsultation.vue';
 const router = useRouter();
 
 const getCurrentDate = (): string => {
