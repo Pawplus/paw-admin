@@ -1,12 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import PopupModalAddDoctor from './PopupModalAddDoctor.vue'
 
 const router = useRouter()
+const isModalOpen = ref(false)
 const imageUrl = ref<string | null>(null)
 
-const formData = ref({
-  profilePicture: null as File | null,
+const formErrors = reactive({
+  profilePicture: '',
   fullName: '',
   gender: '',
   birthDate: '',
@@ -15,32 +17,116 @@ const formData = ref({
   strNumber: '',
   email: '',
   session: '',
-  time: ''
+  time: '',
+  schedules: ''
+})
+
+const formData = reactive({
+  profilePicture: null as string | null,
+  fullName: '',
+  gender: '',
+  birthDate: '',
+  specialist: '',
+  clinicLocation: '',
+  strNumber: '',
+  email: '',
+  session: '',
+  time: '',
+  schedules: [] as string[]
 })
 
 const genderItems = ['Laki-laki', 'Perempuan']
 const specialistItems = ['Anjing', 'Kucing', 'Burung', 'Kelinci']
 const clinicLocations = ['Klinik A', 'Klinik B', 'Klinik C']
 const sessionItems = ['Pagi', 'Siang', 'Sore']
-const timeItems = ['08:00 - 10:00', '10:00 - 12:00', '12:00 - 14:00', '14:00 - 16:00']
+const timeItems = ['08:00 - 10:00', '10:00 - 12:00', '12:00 - 14:00', '15:00 - 16:30']
 
 const addSchedule = () => {
-  // Logika untuk menambahkan jadwal
+  const schedule = `${formData.session} ${formData.time}`
+  formData.schedules.push(schedule)
+  formData.session = ''
+  formData.time = ''
+}
+
+const validateForm = () => {
+  let isValid = true
+
+  // Validasi tipe data dan field kosong
+  if (!formData.fullName || typeof formData.fullName !== 'string') {
+    formErrors.fullName = 'Nama lengkap harus diisi dan berupa teks'
+    isValid = false
+  } else {
+    formErrors.fullName = ''
+  }
+  if (!formData.gender || typeof formData.gender !== 'string') {
+    formErrors.gender = 'Jenis kelamin harus dipilih dan berupa teks'
+    isValid = false
+  } else {
+    formErrors.gender = ''
+  }
+  if (!formData.birthDate || isNaN(Date.parse(formData.birthDate))) {
+    formErrors.birthDate = 'Tanggal lahir harus diisi dan berupa tanggal yang valid'
+    isValid = false
+  } else {
+    formErrors.birthDate = ''
+  }
+  if (!formData.specialist || typeof formData.specialist !== 'string') {
+    formErrors.specialist = 'Spesialis harus dipilih dan berupa teks'
+    isValid = false
+  } else {
+    formErrors.specialist = ''
+  }
+  if (!formData.clinicLocation || typeof formData.clinicLocation !== 'string') {
+    formErrors.clinicLocation = 'Lokasi klinik harus dipilih dan berupa teks'
+    isValid = false
+  } else {
+    formErrors.clinicLocation = ''
+  }
+  if (!formData.strNumber || typeof formData.strNumber !== 'string') {
+    formErrors.strNumber = 'Nomor STR harus diisi dan berupa teks'
+    isValid = false
+  } else {
+    formErrors.strNumber = ''
+  }
+  if (!formData.email || typeof formData.email !== 'string' || !/^\S+@\S+\.\S+$/.test(formData.email)) {
+    formErrors.email = 'Email harus diisi dan berupa email yang valid'
+    isValid = false
+  } else {
+    formErrors.email = ''
+  }
+
+  // Clear errors for non-mandatory fields
+  formErrors.profilePicture = ''
+  formErrors.session = ''
+  formErrors.time = ''
+  formErrors.schedules = ''
+
+  return isValid
 }
 
 const submitForm = () => {
-  // Logika untuk mengirim data
+  if (validateForm()) {
+    isModalOpen.value = true
+  }
 }
+
 const goBack = () => {
   router.back()
 }
 
 const onFileChange = (event: Event) => {
   const input = event.target as HTMLInputElement
-  if (input.files && input.files[0]) {
-    const file = input.files[0]
-    formData.value.profilePicture = file
-    imageUrl.value = URL.createObjectURL(file)
+  const file = input.files?.[0] || null
+  if (file) {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      imageUrl.value = e.target?.result as string
+      formData.profilePicture = e.target?.result as string
+    }
+    reader.onerror = (e) => {
+      console.error('Error reading file:', e)
+    }
+    reader.readAsDataURL(file)
   }
 }
 </script>
@@ -74,15 +160,20 @@ const onFileChange = (event: Event) => {
                 <v-file-input label="Upload" prepend-icon="mdi-camera" @change="onFileChange"></v-file-input>
               </v-col>
               <v-col cols="12" md="8">
-                <v-text-field label="Nama lengkap dengan gelar" v-model="formData.fullName"></v-text-field>
-                <v-select label="Jenis kelamin" :items="genderItems" v-model="formData.gender"></v-select>
-                <v-text-field label="Tanggal lahir" v-model="formData.birthDate" type="date"></v-text-field>
+                <v-text-field label="Nama lengkap dengan gelar" v-model="formData.fullName"
+                  :error-messages="formErrors.fullName ? [formErrors.fullName] : []"></v-text-field>
+                <v-select label="Jenis kelamin" :items="genderItems" v-model="formData.gender"
+                  :error-messages="formErrors.gender ? [formErrors.gender] : []"></v-select>
+                <v-text-field label="Tanggal lahir" v-model="formData.birthDate" type="date"
+                  :error-messages="formErrors.birthDate ? [formErrors.birthDate] : []"></v-text-field>
               </v-col>
             </v-row>
             <v-row>
               <v-col cols="12">
-                <v-select label="Spesialis" :items="specialistItems" v-model="formData.specialist"></v-select>
-                <v-select label="Lokasi klinik" :items="clinicLocations" v-model="formData.clinicLocation"></v-select>
+                <v-select label="Spesialis" :items="specialistItems" v-model="formData.specialist"
+                  :error-messages="formErrors.specialist ? [formErrors.specialist] : []"></v-select>
+                <v-select label="Lokasi klinik" :items="clinicLocations" v-model="formData.clinicLocation"
+                  :error-messages="formErrors.clinicLocation ? [formErrors.clinicLocation] : []"></v-select>
               </v-col>
             </v-row>
 
@@ -93,8 +184,10 @@ const onFileChange = (event: Event) => {
             </v-row>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Nomor STR" v-model="formData.strNumber"></v-text-field>
-                <v-text-field label="Email" v-model="formData.email"></v-text-field>
+                <v-text-field label="Nomor STR" v-model="formData.strNumber"
+                  :error-messages="formErrors.strNumber ? [formErrors.strNumber] : []"></v-text-field>
+                <v-text-field label="Email" v-model="formData.email"
+                  :error-messages="formErrors.email ? [formErrors.email] : []"></v-text-field>
               </v-col>
             </v-row>
 
@@ -119,6 +212,7 @@ const onFileChange = (event: Event) => {
             <v-row justify="center">
               <v-col cols="12" md="8">
                 <v-btn block @click="submitForm" color="primary">Tambah Dokter</v-btn>
+                <PopupModalAddDoctor :formData="formData" :isOpen="isModalOpen" />
               </v-col>
             </v-row>
           </v-form>
