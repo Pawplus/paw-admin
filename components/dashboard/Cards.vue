@@ -4,7 +4,7 @@ import { defineProps } from 'vue';
 import { useTotalClinic } from '~/store/useTotalClinic';
 import { useTotalDoctor } from '~/store/useTotalDoctor';
 import { useTotalFinishedOrder } from '~/store/useTotalFinishedOrder';
-
+import { useTotalActiveOrder } from '~/store/useTotalActiveOrder';
 const props = defineProps({
   role: {
     type: String as PropType<'superadmin' | 'adminklinik'>,
@@ -15,18 +15,20 @@ const props = defineProps({
 const totalClinicStore = useTotalClinic();
 const totalDoctorStore = useTotalDoctor();
 const totalFinishedOrderStore = useTotalFinishedOrder();
+const totalActiveOrderStore = useTotalActiveOrder();
 
 onMounted(async () => {
   await totalClinicStore.fetchTotalClinic();
   await totalDoctorStore.fetchTotalDoctor();
   await totalFinishedOrderStore.fetchTotalFinishedOrders();
+  await totalActiveOrderStore.fetchTotalActiveOrders();
 });
 
 const cardData = computed(() => [
   { title: "Jumlah Klinik", value: totalClinicStore.totalClinic ?? 0 },
   { title: "Jumlah Dokter", value: totalDoctorStore.totalDoctor ?? 0 },
   { title: "Order Selesai", value: totalFinishedOrderStore.totalFinishedOrders ?? 0 },
-  { title: "Order Aktif", value: 23 }
+  { title: "Order Aktif", value: totalActiveOrderStore.totalActiveOrders ?? 0 }
 ]);
 
 const filteredCardData = computed(() => {
