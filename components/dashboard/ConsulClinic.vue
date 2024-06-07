@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useTheme } from "vuetify";
+import { useConsulClinic } from "~/store/useConsulClinic";
+
 const theme = useTheme();
 const primary = theme.current.value.colors.primary;
 const secondary = theme.current.value.colors.secondary;
@@ -52,7 +53,21 @@ const areaChart = {
     },
   ],
 };
+
+const consulClinicStore = useConsulClinic();
+const { totalConsultations, fetchTotalConsultations } = consulClinicStore;
+
+onMounted(() => {
+  fetchTotalConsultations();
+});
 </script>
+
+<style scoped>
+.withbg {
+  background-color: var(--v-theme-background);
+}
+</style>
+
 <template>
   <v-card elevation="10" class="withbg">
     <v-card-item>
@@ -62,7 +77,7 @@ const areaChart = {
       <v-row>
         <v-col cols="12">
           <div class="mt-2">
-            <h3 class="text-h3">600</h3>
+            <h3 class="text-h3">{{ totalConsultations }}</h3>
             <div class="mt-1">
               <v-avatar class="bg-lighterror text-accent" size="25">
                 <ArrowDownRightIcon size="20" />
@@ -75,8 +90,7 @@ const areaChart = {
       </v-row>
     </v-card-item>
     <div class="mt-3">
-      <apexchart type="area" height="60" :options="areachartOptions" :series="areaChart.series">
-      </apexchart>
+      <apexchart type="area" height="60" :options="areachartOptions" :series="areaChart.series"></apexchart>
     </div>
   </v-card>
 </template>
