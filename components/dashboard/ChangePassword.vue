@@ -26,10 +26,15 @@ const toggleShowNewPassword = () => {
 const toggleShowConfirmNewPassword = () => {
     showConfirmNewPassword.value = !showConfirmNewPassword.value
 }
+// Rule validation
+const passwordRule = (v: string) => v.length >= 8 || 'Kata sandi minimal 8 karakter';
+const matchPasswordRule = (v: string) => v === newPassword.value || 'Kata sandi tidak cocok';
 
 const changePassword = () => {
-    // Logic mengubah kata sandi
-    console.log('Kata sandi diubah')
+    // Logic change password
+    if (valid.value) {
+        console.log('Kata sandi diubah')
+    }
 }
 </script>
 
@@ -54,16 +59,17 @@ const changePassword = () => {
                                 required></v-text-field>
                             <v-text-field v-model="newPassword" :type="showNewPassword ? 'text' : 'password'"
                                 :append-icon="showNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                                @click:append="toggleShowNewPassword" label="Kata sandi baru" required></v-text-field>
+                                @click:append="toggleShowNewPassword" :rules="[passwordRule]" label="Kata sandi baru"
+                                required></v-text-field>
                             <v-text-field v-model="confirmNewPassword"
                                 :type="showConfirmNewPassword ? 'text' : 'password'"
                                 :append-icon="showConfirmNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                                @click:append="toggleShowConfirmNewPassword" label="Konfirmasi Kata sandi baru"
-                                required></v-text-field>
+                                @click:append="toggleShowConfirmNewPassword" :rules="[matchPasswordRule]"
+                                label="Konfirmasi Kata sandi baru" required></v-text-field>
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn block :disabled="!valid" @click="changePassword" color="primary" variant="outlined">
+                        <v-btn block :disabled="!valid" @click="changePassword" color="primary" variant="flat">
                             Ubah Kata sandi
                         </v-btn>
                     </v-card-actions>
