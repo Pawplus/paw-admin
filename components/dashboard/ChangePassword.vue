@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import PopupModalChangePassword from './PopupModalChangePassword.vue'
 
 const router = useRouter()
 const currentPassword = ref('')
@@ -10,6 +11,7 @@ const valid = ref(false)
 const showCurrentPassword = ref(false)
 const showNewPassword = ref(false)
 const showConfirmNewPassword = ref(false)
+const dialog = ref(false)
 
 const goBack = () => {
     router.back()
@@ -26,9 +28,14 @@ const toggleShowNewPassword = () => {
 const toggleShowConfirmNewPassword = () => {
     showConfirmNewPassword.value = !showConfirmNewPassword.value
 }
+
 // Rule validation
-const passwordRule = (v: string) => v.length >= 8 || 'Kata sandi minimal 8 karakter';
-const matchPasswordRule = (v: string) => v === newPassword.value || 'Kata sandi tidak cocok';
+const passwordRule = (v: string) => v.length >= 8 || 'Kata sandi minimal 8 karakter'
+const matchPasswordRule = (v: string) => v === newPassword.value || 'Kata sandi tidak cocok'
+
+const openDialog = () => {
+    dialog.value = true
+}
 
 const changePassword = () => {
     // Logic change password
@@ -43,7 +50,7 @@ const changePassword = () => {
         <v-row justify="center" align="center">
             <v-col cols="12" md="6">
                 <v-card>
-                    <v-card-title class=" mt-9 py-5 d-flex justify-space-between align-center">
+                    <v-card-title class="mt-9 py-5 d-flex justify-space-between align-center">
                         <v-row align="center" class="py-3 px-3">
                             <v-btn icon @click="goBack" class="mx-3">
                                 <v-icon>mdi-arrow-left</v-icon>
@@ -69,13 +76,14 @@ const changePassword = () => {
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn block :disabled="!valid" @click="changePassword" color="primary" variant="flat">
+                        <v-btn block :disabled="!valid" @click="openDialog" color="primary" variant="flat">
                             Ubah Kata sandi
                         </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-col>
         </v-row>
+        <PopupModalChangePassword v-model="dialog" @confirm="changePassword" />
     </v-container>
 </template>
 
