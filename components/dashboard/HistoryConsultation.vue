@@ -124,24 +124,15 @@ const filteredHeaders = computed(() => {
 </script>
 
 <template>
-  <p class="mt-5 mb-3 text-h6">Riwayat Konsultasi</p>
-  <v-text-field
-    v-model="searchQuery"
-    label="Cari berdasarkan Order ID, Email Pengguna, atau Dokter"
-    class="mb-4"
-    @input="loadItems({ page: 1, itemsPerPage: itemsPerPage, sortBy: [] })"
-  ></v-text-field>
-  <v-data-table
-    v-model:items-per-page="itemsPerPage"
-    :header="headers"
-    :items="serverItems"
-    :items-length="totalItems"
-    :loading="loading"
-    item-value="no"
-    @update:options="loadItems"
-  >
-    <template v-slot:[`item.action`]="{ item }">
-      <v-btn color="primary" @click="DetailPayment(item)">Detail</v-btn>
-    </template>
-  </v-data-table>
+  <v-container>
+    <p class="mt-5 mb-3 text-h4">Riwayat Konsultasi</p>
+    <v-text-field v-model="searchQuery" label="Cari berdasarkan Order ID, Email Pengguna, atau Dokter" class="mb-4"
+      @input="loadItems({ page: 1, itemsPerPage: itemsPerPage, sortBy: [] })"></v-text-field>
+    <v-data-table v-model:items-per-page="itemsPerPage" :header="headers" :items="serverItems"
+      :items-length="totalItems" :loading="loading" item-value="no" @update:options="loadItems">
+      <template v-slot:[`item.action`]="{ item }">
+        <v-btn color="primary" @click="DetailPayment(item)">Detail</v-btn>
+      </template>
+    </v-data-table>
+  </v-container>
 </template>
