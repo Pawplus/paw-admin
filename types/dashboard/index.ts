@@ -70,6 +70,7 @@ type Consultation = {
   }>;
 };
 
+
 // List Klinik Types
 type ListKlinik = {
   no: number;
@@ -79,6 +80,21 @@ type ListKlinik = {
   alamat: string;
   status: string;
   aksi: string;
+
+// Add Clinic types
+type AddClinic = {
+  name: string;
+  email: string;
+  address: {
+    street: string;
+    rt: string;
+    rw: string;
+    subdistrict: string;
+    district: string;
+    city: string;
+    postalCode: string;
+  };
+  operationalHours: Array<{ day: string; open: string; close: string }>;
 };
 
 export type {
@@ -88,4 +104,5 @@ export type {
   Payment,
   Consultation,
   ListKlinik,
+  AddClinic
 };
