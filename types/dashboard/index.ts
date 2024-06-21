@@ -70,6 +70,17 @@ type Consultation = {
   }>;
 };
 
+
+// List Klinik Types
+type ListKlinik = {
+  no: number;
+  klinikId: string;
+  namaKlinik: string;
+  emailKlinik: string;
+  alamat: string;
+  status: string;
+  aksi: string;
+
 // Add Clinic types
 type AddClinic = {
   name: string;
@@ -92,5 +103,6 @@ export type {
   productsCards,
   Payment,
   Consultation,
+  ListKlinik,
   AddClinic
 };
