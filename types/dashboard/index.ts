@@ -80,7 +80,7 @@ type ListKlinik = {
   alamat: string;
   status: string;
   aksi: string;
-
+};
 // Add Clinic types
 type AddClinic = {
   name: string;
@@ -97,6 +97,16 @@ type AddClinic = {
   operationalHours: Array<{ day: string; open: string; close: string }>;
 };
 
+// Laporan keuangan
+type ReportItem = {
+  id: string;
+  bulan: string;
+  tahun: number;
+  totalRevenue: string;
+  totalTransaksi: number;
+  lihatLaporan: string;
+};
+
 export type {
   recentTrans,
   productPerformanceType,
@@ -104,5 +114,6 @@ export type {
   Payment,
   Consultation,
   ListKlinik,
-  AddClinic
+  AddClinic,
+  ReportItem
 };
